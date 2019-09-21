@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux';
+
 import { FILTERS } from '../constants';
 import * as TYPES from './types';
 
@@ -65,10 +67,8 @@ function cart(state = initialState.cart, action) {
   }
 }
 
-export default function(state = initialState, action) {
-  return {
-    bikes: bikes(state.bikes, action),
-    filter: filter(state.filter, action),
-    cart: cart(state.cart, action),
-  };
-}
+export default combineReducers({
+  bikes,
+  filter,
+  cart,
+});
