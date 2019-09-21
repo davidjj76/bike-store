@@ -17,7 +17,18 @@ import { BikesService } from './services';
 
 const store = configureStore();
 
-store.subscribe(() => console.log(store.getState()));
+const render = () => {
+  const { getState, dispatch } = store;
+  const props = {
+    ...getState(),
+    dispatch,
+  };
+  ReactDOM.render(<App {...props} />, document.getElementById('root'));
+};
+
+store.subscribe(render);
+
+render();
 
 store.dispatch(setBikes(BikesService.getAllBikes()));
 store.dispatch(setBikesFilter(BIKE_FILTERS.MOUNTAIN));
@@ -26,5 +37,3 @@ store.dispatch(addToCart(2));
 store.dispatch(removeFromCart(1));
 store.dispatch(setBikesFilter(BIKE_FILTERS.ROAD));
 store.dispatch(checkoutCart());
-
-ReactDOM.render(<App />, document.getElementById('root'));
