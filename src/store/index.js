@@ -1,8 +1,13 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-import reducer from './reducers';
+import * as reducers from './reducers';
 
 export function configureStore(preloadedState) {
-  const store = createStore(reducer, preloadedState);
+  const store = createStore(
+    combineReducers(reducers),
+    preloadedState,
+    composeWithDevTools(),
+  );
   return store;
 }
