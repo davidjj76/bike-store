@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import { FILTERS } from '../constants';
+import { BIKE_FILTERS } from '../constants';
 import * as TYPES from './types';
 
 const initialState = {
   bikes: [],
-  filter: FILTERS.ALL,
+  bikesFilter: BIKE_FILTERS.ALL,
   cart: [],
 };
 
@@ -41,10 +41,10 @@ function bikes(state = initialState.bikes, action) {
   }
 }
 
-function filter(state = initialState.filter, action) {
+function filter(state = initialState.bikesFilter, action) {
   switch (action.type) {
-    case TYPES.SET_FILTER:
-      return action.filter;
+    case TYPES.SET_BIKES_FILTER:
+      return action.bikesFilter;
 
     default:
       return state;

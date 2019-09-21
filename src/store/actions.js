@@ -1,6 +1,6 @@
 import {
   SET_BIKES,
-  SET_FILTER,
+  SET_BIKES_FILTER,
   ADD_TO_CART,
   REMOVE_FROM_CART,
   CHECKOUT_CART,
@@ -11,9 +11,9 @@ export const setBikes = bikes => ({
   bikes,
 });
 
-export const setFilter = filter => ({
-  type: SET_FILTER,
-  filter,
+export const setBikesFilter = bikesFilter => ({
+  type: SET_BIKES_FILTER,
+  bikesFilter,
 });
 
 export const addToCart = itemId => ({
