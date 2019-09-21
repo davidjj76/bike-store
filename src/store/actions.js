@@ -16,14 +16,14 @@ export const setFilter = filter => ({
   filter,
 });
 
-export const addToCart = bikeId => ({
+export const addToCart = itemId => ({
   type: ADD_TO_CART,
-  bikeId,
+  itemId,
 });
 
-export const removeFromCart = bikeId => ({
+export const removeFromCart = itemId => ({
   type: REMOVE_FROM_CART,
-  bikeId,
+  itemId,
 });
 
 export const checkoutCart = () => ({
