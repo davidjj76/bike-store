@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/App';
+import Root from './components/Root';
 import './index.css';
 
 import { configureStore } from './store';
 const store = configureStore();
 
-ReactDOM.render(<App store={store} />, document.getElementById('root'));
+ReactDOM.render(<Root store={store} />, document.getElementById('root'));

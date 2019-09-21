@@ -1,0 +1,7 @@
+.header {
+  background-color: green;
+}
+
+.header .navlink.active {
+  color: red;
+}

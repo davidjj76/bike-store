@@ -1,0 +1,34 @@
+.app {
+  height: 100vh;
+}
+
+.app .app-header {
+  height: 60px;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+}
+
+.app .app-main {
+  background-color: yellow;
+  height: calc(100vh - 60px);
+  padding-top: 60px;
+}
+
+.app .app-main > * {
+  height: 100%;
+}
+
+.app .app-main .app-store {
+  display: flex;
+}
+
+.app .app-main .app-store .app-store-filters {
+  flex: 0 0 180px;
+}
+
+.app .app-main .app-store .app-store-list {
+  flex: 1 1 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

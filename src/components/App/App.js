@@ -1,27 +1,13 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-import {
-  setBikes,
-  setBikesFilter,
-  addToCart,
-  removeFromCart,
-  checkoutCart,
-} from '../../store/actions';
-import { BIKE_FILTERS } from '../../constants';
-import { BikesService } from '../../services';
+import Header from '../Header';
+import Cart from '../Cart';
+import BikesStore from '../BikesStore';
 
-const actions = [
-  setBikes(BikesService.getAllBikes()),
-  setBikesFilter(BIKE_FILTERS.MOUNTAIN),
-  addToCart(1),
-  addToCart(2),
-  removeFromCart(1),
-  setBikesFilter(BIKE_FILTERS.ROAD),
-  checkoutCart(),
-];
-
+import './styles.css';
 class App extends Component {
-  state = { ...this.props.store.getState(), nextAction: 0 };
+  state = this.props.store.getState();
 
   componentDidMount() {
     const { store } = this.props;
@@ -32,27 +18,26 @@ class App extends Component {
     this.unsubscribe();
   }
 
-  dispatchNextAction = () => {
-    const { store } = this.props;
-    const { nextAction } = this.state;
-    store.dispatch(actions[nextAction]);
-    this.setState({ nextAction: nextAction + 1 });
-  };
-
   render() {
-    const { nextAction, ...state } = this.state;
     return (
       <div className="app">
-        <button
-          disabled={nextAction === actions.length}
-          onClick={this.dispatchNextAction}
-        >
-          Dispatch next action
-        </button>
-        <div>{`last action: ${
-          nextAction === 0 ? 'none' : JSON.stringify(actions[nextAction - 1])
-        }`}</div>
-        <div>{`state: ${JSON.stringify(state)}`}</div>
+        <Header className="app-header" />
+        <main className="app-main">
+          <Switch>
+            <Route exact path="/cart" component={Cart}></Route>
+            <Route
+              path="/"
+              render={props => (
+                <BikesStore
+                  {...props}
+                  className="app-store"
+                  filtersClassName="app-store-filters"
+                  listClassName="app-store-list"
+                />
+              )}
+            ></Route>
+          </Switch>
+        </main>
       </div>
     );
   }
