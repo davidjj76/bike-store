@@ -4,7 +4,7 @@ import * as TYPES from './types';
 const initialState = {
   bikes: [],
   bikesFilter: BIKE_FILTERS.ALL,
-  cart: [],
+  cart: {},
 };
 
 const updateItem = (items, updatedId, update) => {
@@ -31,7 +31,7 @@ export function bikes(state = initialState.bikes, action) {
 
     case TYPES.REMOVE_FROM_CART:
       return updateItem(state, action.itemId, item => ({
-        stock: item.stock + 1,
+        stock: item.stock + action.quantity,
       }));
 
     default:
@@ -52,10 +52,12 @@ export function bikesFilter(state = initialState.bikesFilter, action) {
 export function cart(state = initialState.cart, action) {
   switch (action.type) {
     case TYPES.ADD_TO_CART:
-      return [...state, action.itemId];
+      return { ...state, [action.itemId]: (state[action.itemId] || 0) + 1 };
 
     case TYPES.REMOVE_FROM_CART:
-      return state.filter(item => item !== action.itemId);
+      const newState = { ...state };
+      delete newState[action.itemId];
+      return newState;
 
     case TYPES.CHECKOUT_CART:
       return initialState.cart;

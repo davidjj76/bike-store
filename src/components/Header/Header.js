@@ -1,4 +1,5 @@
 import React from 'react';
+import T from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import './styles.css';
@@ -18,7 +19,7 @@ export default function Header({ className, cartItems }) {
           }
           to="/"
         >
-          Store
+          Bikes
         </NavLink>
         <NavLink className="navlink" exact to="/cart">
           {`Checkout (${cartItems})`}
@@ -27,3 +28,7 @@ export default function Header({ className, cartItems }) {
     </header>
   );
 }
+
+Header.propTypes = {
+  cartItems: T.number.isRequired,
+};

@@ -21,9 +21,10 @@ export const addToCart = itemId => ({
   itemId,
 });
 
-export const removeFromCart = itemId => ({
+export const removeFromCart = (itemId, quantity) => ({
   type: REMOVE_FROM_CART,
   itemId,
+  quantity,
 });
 
 export const checkoutCart = () => ({
