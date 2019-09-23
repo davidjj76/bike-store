@@ -3,8 +3,11 @@ import classNames from 'classnames';
 
 import BikesFilters from '../BikesFilters';
 import BikesList from '../BikesList';
+import BikesService from '../../services/Bikes';
 
 import './styles.css';
+
+const bikes = BikesService.getAllBikes();
 
 export default function BikesStore({
   className,
@@ -14,7 +17,7 @@ export default function BikesStore({
   return (
     <div className={classNames('bikes-store', className)}>
       <BikesFilters className={filtersClassName} />
-      <BikesList className={listClassName} />
+      <BikesList className={listClassName} bikes={bikes} />
     </div>
   );
 }

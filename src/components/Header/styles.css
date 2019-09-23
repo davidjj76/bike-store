@@ -1,7 +1,28 @@
 .header {
-  background-color: green;
+  align-items: center;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
 }
 
-.header .navlink.active {
-  color: red;
+.header .title {
+  font-family: 'Lobster', cursive;
+}
+
+.header .navbar .navlink {
+  border-bottom: 1px solid #666;
+  color: #666;
+  font-weight: 500;
+  margin-left: 2rem;
+}
+
+.header .navbar .navlink:hover {
+  color: #e76000;
+  border-color: #e76000;
+}
+
+.header .navbar .navlink.active {
+  color: #e76000;
+  border-color: #e76000;
 }
