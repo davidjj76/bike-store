@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import T from 'prop-types';
 import classNames from 'classnames';
 
@@ -43,23 +43,31 @@ BikeCard.defaultProps = {
   stock: false,
 };
 
-export default function BikesList({ className, bikes, addToCart }) {
-  return (
-    <div className={classNames('bikes-list', className)}>
-      Bikes List
-      <ul className="list">
-        {bikes.map(bike => (
-          <li className="list-item" key={bike.id}>
-            <BikeCard {...bike} onAddToCartClick={() => addToCart(bike.id)} />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+export default class BikesList extends Component {
+  componentDidMount() {
+    this.props.onLoad();
+  }
+
+  render() {
+    const { className, bikes, addToCart } = this.props;
+    return (
+      <div className={classNames('bikes-list', className)}>
+        Bikes List
+        <ul className="list">
+          {bikes.map(bike => (
+            <li className="list-item" key={bike.id}>
+              <BikeCard {...bike} onAddToCartClick={() => addToCart(bike.id)} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
 }
 
 BikesList.propTypes = {
   className: T.string,
   bikes: T.arrayOf(T.shape({ id: T.string.isRequired })),
   addToCart: T.func.isRequired,
+  onLoad: T.func.isRequired,
 };

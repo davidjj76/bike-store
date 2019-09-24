@@ -15,6 +15,7 @@ export default function BikesStore({
   bikesFilter,
   setBikesFilter,
   addToCart,
+  onListLoad,
 }) {
   return (
     <div className={classNames('bikes-store', className)}>
@@ -27,6 +28,7 @@ export default function BikesStore({
         className={listClassName}
         bikes={bikes}
         addToCart={addToCart}
+        onLoad={onListLoad}
       />
     </div>
   );
@@ -36,4 +38,5 @@ BikesStore.propTypes = {
   className: T.string,
   filtersClassName: T.string,
   listClassName: T.string,
+  onListLoad: T.func.isRequired,
 };

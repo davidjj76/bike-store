@@ -18,7 +18,6 @@ class App extends Component {
     this.unsubscribe = store.subscribe(() => {
       this.setState(store.getState());
     });
-    store.dispatch(setBikes(BikesService.getAllBikes()));
   }
 
   componentWillUnmount() {
@@ -32,6 +31,23 @@ class App extends Component {
         ? bikes
         : bikes.filter(bike => bike.type === bikesFilter);
     return visibleBikes.map(bike => ({ ...bike, hasStock: bike.stock > 0 }));
+  };
+
+  setBikesFilter = filter => {
+    const { dispatch } = this.props.store;
+    dispatch(setBikesFilter(filter));
+  };
+
+  addToCart = bikeId => {
+    const { dispatch } = this.props.store;
+    dispatch(addToCart(bikeId));
+  };
+
+  loadBikes = () => {
+    const { dispatch } = this.props.store;
+    BikesService.getAllBikes().then(bikes => {
+      dispatch(setBikes(bikes));
+    });
   };
 
   render() {
@@ -56,8 +72,9 @@ class App extends Component {
                   listClassName="app-store-list"
                   bikes={this.getVisibleBikes()}
                   bikesFilter={bikesFilter}
-                  setBikesFilter={filter => dispatch(setBikesFilter(filter))}
+                  setBikesFilter={this.setBikesFilter}
                   addToCart={bikeId => dispatch(addToCart(bikeId))}
+                  onListLoad={this.loadBikes}
                 />
               )}
             ></Route>
