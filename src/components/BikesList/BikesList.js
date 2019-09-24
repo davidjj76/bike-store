@@ -2,6 +2,8 @@ import React from 'react';
 import T from 'prop-types';
 import classNames from 'classnames';
 
+import List from '../List';
+
 import './styles.css';
 
 function BikeCard({ name, image, price, hasStock, onAddToCartClick }) {
@@ -47,13 +49,13 @@ export default function BikesList({ className, bikes, addToCart }) {
   return (
     <div className={classNames('bikes-list', className)}>
       Bikes List
-      <ul className="list">
-        {bikes.map(bike => (
-          <li className="list-item" key={bike.id}>
-            <BikeCard {...bike} onAddToCartClick={() => addToCart(bike.id)} />
-          </li>
-        ))}
-      </ul>
+      <List
+        className="list"
+        items={bikes}
+        renderItem={bike => (
+          <BikeCard {...bike} onAddToCartClick={() => addToCart(bike.id)} />
+        )}
+      />
     </div>
   );
 }

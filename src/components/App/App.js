@@ -50,7 +50,7 @@ class App extends Component {
     dispatch(addToCart(bikeId));
   };
 
-  getCartItems = () => {
+  getTotalCartItems = () => {
     const { cart } = this.state;
     return Object.values(cart).reduce((acc, quantity) => acc + quantity, 0);
   };
@@ -59,7 +59,10 @@ class App extends Component {
     const { bikesFilter } = this.state;
     return (
       <div className="app">
-        <Header className="app-header" cartItems={this.getCartItems()} />
+        <Header
+          className="app-header"
+          totalCartItems={this.getTotalCartItems()}
+        />
         <main className="app-main">
           <Switch>
             <Route exact path="/cart" component={Cart}></Route>

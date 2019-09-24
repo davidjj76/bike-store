@@ -7,7 +7,7 @@ import classNames from 'classnames';
 
 const validFilters = ['/mountain', '/road'];
 
-export default function Header({ className, cartItems }) {
+export default function Header({ className, totalCartItems }) {
   return (
     <header className={classNames('header', className)}>
       <h1 className="title">BIKES - STORE</h1>
@@ -22,7 +22,7 @@ export default function Header({ className, cartItems }) {
           Bikes
         </NavLink>
         <NavLink className="navlink" exact to="/cart">
-          {`Checkout (${cartItems})`}
+          {`Checkout (${totalCartItems})`}
         </NavLink>
       </div>
     </header>
@@ -30,5 +30,6 @@ export default function Header({ className, cartItems }) {
 }
 
 Header.propTypes = {
-  cartItems: T.number.isRequired,
+  className: T.string,
+  totalCartItems: T.number.isRequired,
 };
