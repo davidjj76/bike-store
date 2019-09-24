@@ -7,7 +7,13 @@ import BikesStore from '../BikesStore';
 
 import { BIKE_FILTERS } from '../../constants';
 import BikesService from '../../services/Bikes';
-import { setBikes, setBikesFilter, addToCart } from '../../store/actions';
+import {
+  setBikes,
+  setBikesFilter,
+  addToCart,
+  removeFromCart,
+  checkoutCart,
+} from '../../store/actions';
 
 import './styles.css';
 class App extends Component {
@@ -55,6 +61,25 @@ class App extends Component {
     return Object.values(cart).reduce((acc, quantity) => acc + quantity, 0);
   };
 
+  getCartItems = () => {
+    const { cart, bikes } = this.state;
+    return Object.entries(cart).map(entry => {
+      const [bikeId, quantity] = entry;
+      const bike = bikes.find(bike => bike.id === bikeId);
+      return { ...bike, quantity, totalPrice: bike.price * quantity };
+    });
+  };
+
+  removeFromCart = (itemId, quantity) => {
+    const { dispatch } = this.props.store;
+    dispatch(removeFromCart(itemId, quantity));
+  };
+
+  checkoutCart = () => {
+    const { dispatch } = this.props.store;
+    dispatch(checkoutCart());
+  };
+
   render() {
     const { bikesFilter } = this.state;
     return (
@@ -65,7 +90,18 @@ class App extends Component {
         />
         <main className="app-main">
           <Switch>
-            <Route exact path="/cart" component={Cart}></Route>
+            <Route
+              exact
+              path="/cart"
+              render={props => (
+                <Cart
+                  {...props}
+                  items={this.getCartItems()}
+                  removeFromCart={this.removeFromCart}
+                  checkoutCart={this.checkoutCart}
+                />
+              )}
+            />
             <Route
               path="/"
               render={props => (
