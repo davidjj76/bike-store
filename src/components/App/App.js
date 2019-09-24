@@ -18,19 +18,17 @@ class App extends Component {
     this.unsubscribe = store.subscribe(() => {
       this.setState(store.getState());
     });
+    this.loadBikes();
   }
 
   componentWillUnmount() {
     this.unsubscribe();
   }
 
-  getVisibleBikes = () => {
-    const { bikes, bikesFilter } = this.state;
-    const visibleBikes =
-      bikesFilter === BIKE_FILTERS.ALL
-        ? bikes
-        : bikes.filter(bike => bike.type === bikesFilter);
-    return visibleBikes.map(bike => ({ ...bike, hasStock: bike.stock > 0 }));
+  loadBikes = () => {
+    const { dispatch } = this.props.store;
+    const bikes = BikesService.getAllBikes();
+    dispatch(setBikes(bikes));
   };
 
   setBikesFilter = filter => {
@@ -38,27 +36,30 @@ class App extends Component {
     dispatch(setBikesFilter(filter));
   };
 
+  getVisibleBikes = () => {
+    const { bikes, bikesFilter } = this.state;
+    let visibleBikes = bikes;
+    if (bikesFilter !== BIKE_FILTERS.ALL) {
+      visibleBikes = bikes.filter(bike => bike.type === bikesFilter);
+    }
+    return visibleBikes.map(bike => ({ ...bike, hasStock: bike.stock > 0 }));
+  };
+
   addToCart = bikeId => {
     const { dispatch } = this.props.store;
     dispatch(addToCart(bikeId));
   };
 
-  loadBikes = () => {
-    const { dispatch } = this.props.store;
-    BikesService.getAllBikes().then(bikes => {
-      dispatch(setBikes(bikes));
-    });
+  getCartItems = () => {
+    const { cart } = this.state;
+    return Object.values(cart).reduce((acc, quantity) => acc + quantity, 0);
   };
 
   render() {
-    const { bikesFilter, cart } = this.state;
-    const { dispatch } = this.props.store;
+    const { bikesFilter } = this.state;
     return (
       <div className="app">
-        <Header
-          className="app-header"
-          cartItems={Object.values(cart).reduce((acc, v) => acc + v, 0)}
-        />
+        <Header className="app-header" cartItems={this.getCartItems()} />
         <main className="app-main">
           <Switch>
             <Route exact path="/cart" component={Cart}></Route>
@@ -73,8 +74,7 @@ class App extends Component {
                   bikes={this.getVisibleBikes()}
                   bikesFilter={bikesFilter}
                   setBikesFilter={this.setBikesFilter}
-                  addToCart={bikeId => dispatch(addToCart(bikeId))}
-                  onListLoad={this.loadBikes}
+                  addToCart={this.addToCart}
                 />
               )}
             ></Route>
