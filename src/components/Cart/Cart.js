@@ -75,7 +75,7 @@ export default function Cart({
               />
             )}
           />
-          <button className="checkout" onClick={checkoutCart}>
+          <button className="button active checkout" onClick={checkoutCart}>
             CHECKOUT CART
           </button>
         </>

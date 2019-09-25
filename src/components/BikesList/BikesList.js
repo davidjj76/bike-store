@@ -21,7 +21,7 @@ function BikeCard({ name, image, price, hasStock, onAddToCartClick }) {
         </div>
         <div className="actions">
           {hasStock ? (
-            <button className="buy" onClick={onAddToCartClick}>
+            <button className="button" onClick={onAddToCartClick}>
               add to cart
             </button>
           ) : (
