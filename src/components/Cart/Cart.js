@@ -1,6 +1,7 @@
 import React from 'react';
 import T from 'prop-types';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 import List from '../List';
 
@@ -21,10 +22,10 @@ function CartItem({
         </picture>
       </div>
       <span className="name">{name}</span>
-      <span className="quantity number">{`${quantity}`}</span>
-      <span className="price number">{`${totalPrice.toLocaleString()} €`}</span>
+      <span className="quantity">{`${quantity}`}</span>
+      <span className="price">{`${totalPrice.toLocaleString()} €`}</span>
       <button
-        className="remove"
+        className="link remove"
         onClick={() => onRemoveFromCartClick(quantity)}
       >
         remove from cart
@@ -41,6 +42,16 @@ CartItem.propTypes = {
   onRemoveFromCartClick: T.func.isRequired,
 };
 
+const CartHeader = () => (
+  <div className="cart-header list-item">
+    <span className="picture">checkout cart</span>
+    <span className="name">details</span>
+    <span className="quantity">quantity</span>
+    <span className="price">price</span>
+    <button className="remove">remove from cart</button>
+  </div>
+);
+
 export default function Cart({
   className,
   items,
@@ -49,22 +60,33 @@ export default function Cart({
 }) {
   return (
     <div className={classNames('cart', className)}>
-      Checkout cart
       {items.length ? (
-        <List
-          className="list"
-          items={items}
-          renderItem={item => (
-            <CartItem
-              {...item}
-              onRemoveFromCartClick={quantity =>
-                removeFromCart(item.id, quantity)
-              }
-            />
-          )}
-        />
+        <>
+          <CartHeader />
+          <List
+            className="list"
+            items={items}
+            renderItem={item => (
+              <CartItem
+                {...item}
+                onRemoveFromCartClick={quantity =>
+                  removeFromCart(item.id, quantity)
+                }
+              />
+            )}
+          />
+          <button className="checkout" onClick={checkoutCart}>
+            CHECKOUT CART
+          </button>
+        </>
       ) : (
-        <div>No items</div>
+        <div>
+          No bikes in your cart, go to{' '}
+          <Link className="link" to="/">
+            Bikes Store
+          </Link>{' '}
+          and choose your favourites.
+        </div>
       )}
     </div>
   );

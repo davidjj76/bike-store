@@ -32,3 +32,17 @@
   overflow-x: hidden;
   overflow-y: auto;
 }
+
+/* General styles for links */
+.app .link {
+  border-bottom: 1px solid #666;
+  color: #666;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.app .link:hover,
+.app .link.active {
+  color: #e76000;
+  border-color: #e76000;
+}

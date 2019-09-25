@@ -13,7 +13,7 @@ export default function Header({ className, totalCartItems }) {
       <h1 className="title">BIKES - STORE</h1>
       <div className="navbar">
         <NavLink
-          className="navlink"
+          className="link"
           isActive={({ isExact }, { pathname }) =>
             isExact || validFilters.includes(pathname)
           }
@@ -21,7 +21,7 @@ export default function Header({ className, totalCartItems }) {
         >
           Bikes
         </NavLink>
-        <NavLink className="navlink" exact to="/cart">
+        <NavLink className="link" exact to="/cart">
           {`Checkout (${totalCartItems})`}
         </NavLink>
       </div>

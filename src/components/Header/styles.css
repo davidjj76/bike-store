@@ -10,19 +10,6 @@
   font-family: 'Lobster', cursive;
 }
 
-.header .navbar .navlink {
-  border-bottom: 1px solid #666;
-  color: #666;
-  font-weight: 500;
+.header .navbar .link {
   margin-left: 2rem;
-}
-
-.header .navbar .navlink:hover {
-  color: #e76000;
-  border-color: #e76000;
-}
-
-.header .navbar .navlink.active {
-  color: #e76000;
-  border-color: #e76000;
 }
