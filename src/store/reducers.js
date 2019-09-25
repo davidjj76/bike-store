@@ -26,7 +26,7 @@ export function bikes(state = initialState.bikes, action) {
 
     case TYPES.ADD_TO_CART:
       return updateItem(state, action.itemId, item => ({
-        stock: item.stock - 1,
+        stock: item.stock - action.quantity,
       }));
 
     case TYPES.REMOVE_FROM_CART:
@@ -52,7 +52,10 @@ export function bikesFilter(state = initialState.bikesFilter, action) {
 export function cart(state = initialState.cart, action) {
   switch (action.type) {
     case TYPES.ADD_TO_CART:
-      return { ...state, [action.itemId]: (state[action.itemId] || 0) + 1 };
+      return {
+        ...state,
+        [action.itemId]: (state[action.itemId] || 0) + action.quantity,
+      };
 
     case TYPES.REMOVE_FROM_CART:
       const newState = { ...state };

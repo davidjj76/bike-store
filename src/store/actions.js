@@ -16,9 +16,10 @@ export const setBikesFilter = bikesFilter => ({
   bikesFilter,
 });
 
-export const addToCart = itemId => ({
+export const addToCart = (itemId, quantity = 1) => ({
   type: ADD_TO_CART,
   itemId,
+  quantity,
 });
 
 export const removeFromCart = (itemId, quantity) => ({
