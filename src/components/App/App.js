@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Header from '../Header';
 import Cart from '../Cart';
 import BikesStore from '../BikesStore';
+import Loading from '../Loading';
 
 import { BIKE_FILTERS } from '../../constants';
 import BikesService from '../../services/Bikes';
@@ -119,6 +120,7 @@ class App extends Component {
             ></Route>
           </Switch>
         </main>
+        {/* <Loading className="app-loading" /> */}
       </div>
     );
   }

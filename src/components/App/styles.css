@@ -33,6 +33,13 @@
   overflow-y: auto;
 }
 
+.app .app-loading {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
 /* General styles for links */
 .link {
   border-bottom: 1px solid #666;
