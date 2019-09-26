@@ -4,9 +4,13 @@ import {
   FETCH_BIKES_SUCCESS,
   // SET_BIKES,
   SET_BIKES_FILTER,
-  ADD_TO_CART,
+  // ADD_TO_CART,
   REMOVE_FROM_CART,
-  CHECKOUT_CART,
+  // CHECKOUT_CART,
+  CHECKOUT_CART_REQUEST,
+  CHECKOUT_CART_SUCCESS,
+  ADD_TO_CART_SUCCESS,
+  ADD_TO_CART_REQUEST,
 } from './types';
 
 import BikesService from '../services/Bikes';
@@ -44,11 +48,31 @@ export const setBikesFilter = bikesFilter => ({
   bikesFilter,
 });
 
-export const addToCart = (itemId, quantity = 1) => ({
-  type: ADD_TO_CART,
+// export const addToCart = (itemId, quantity = 1) => ({
+//   type: ADD_TO_CART,
+//   itemId,
+//   quantity,
+// });
+
+export const addToCartRequest = () => ({
+  type: ADD_TO_CART_REQUEST,
+});
+
+export const addToCartSuccess = (itemId, quantity) => ({
+  type: ADD_TO_CART_SUCCESS,
   itemId,
   quantity,
 });
+
+export function addToCart(itemId, quantity = 1) {
+  return function(dispatch, getState) {
+    // With getState we could check stock before dispatch actions
+    dispatch(addToCartRequest());
+    return BikesService.addToCart().then(() =>
+      dispatch(addToCartSuccess(itemId, quantity)),
+    );
+  };
+}
 
 export const removeFromCart = (itemId, quantity) => ({
   type: REMOVE_FROM_CART,
@@ -56,6 +80,24 @@ export const removeFromCart = (itemId, quantity) => ({
   quantity,
 });
 
-export const checkoutCart = () => ({
-  type: CHECKOUT_CART,
+// export const checkoutCart = () => ({
+//   type: CHECKOUT_CART,
+// });
+
+export const checkoutCartRequest = () => ({
+  type: CHECKOUT_CART_REQUEST,
 });
+
+export const checkoutCartSuccess = () => ({
+  type: CHECKOUT_CART_SUCCESS,
+});
+
+export function checkoutCart() {
+  return function(dispatch, getState) {
+    const { cart } = getState();
+    dispatch(checkoutCartRequest());
+    return BikesService.checkOutCart(cart).then(() =>
+      dispatch(checkoutCartSuccess()),
+    );
+  };
+}

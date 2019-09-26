@@ -31,7 +31,12 @@ export function bikes(state = initialState.bikes, action) {
     case TYPES.FETCH_BIKES_SUCCESS:
       return action.bikes;
 
-    case TYPES.ADD_TO_CART:
+    // case TYPES.ADD_TO_CART:
+    //   return updateItem(state, action.itemId, item => ({
+    //     stock: item.stock - action.quantity,
+    //   }));
+
+    case TYPES.ADD_TO_CART_SUCCESS:
       return updateItem(state, action.itemId, item => ({
         stock: item.stock - action.quantity,
       }));
@@ -58,7 +63,13 @@ export function bikesFilter(state = initialState.bikesFilter, action) {
 
 export function cart(state = initialState.cart, action) {
   switch (action.type) {
-    case TYPES.ADD_TO_CART:
+    // case TYPES.ADD_TO_CART:
+    //   return {
+    //     ...state,
+    //     [action.itemId]: (state[action.itemId] || 0) + action.quantity,
+    //   };
+
+    case TYPES.ADD_TO_CART_SUCCESS:
       return {
         ...state,
         [action.itemId]: (state[action.itemId] || 0) + action.quantity,
@@ -69,7 +80,10 @@ export function cart(state = initialState.cart, action) {
       delete newState[action.itemId];
       return newState;
 
-    case TYPES.CHECKOUT_CART:
+    // case TYPES.CHECKOUT_CART:
+    //   return initialState.cart;
+
+    case TYPES.CHECKOUT_CART_SUCCESS:
       return initialState.cart;
 
     default:
@@ -80,6 +94,8 @@ export function cart(state = initialState.cart, action) {
 export function ui(state = initialState.ui, action) {
   switch (action.type) {
     case TYPES.FETCH_BIKES_REQUEST:
+    case TYPES.CHECKOUT_CART_REQUEST:
+    case TYPES.ADD_TO_CART_REQUEST:
       return {
         ...state,
         isFetching: true,
@@ -94,6 +110,8 @@ export function ui(state = initialState.ui, action) {
       };
 
     case TYPES.FETCH_BIKES_SUCCESS:
+    case TYPES.CHECKOUT_CART_SUCCESS:
+    case TYPES.ADD_TO_CART_SUCCESS:
       return {
         ...state,
         isFetching: false,

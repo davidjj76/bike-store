@@ -50,6 +50,13 @@ export default {
   // getAllBikes: () => bikes,
   addToCart: () => new Promise(resolve => setTimeout(resolve, TIMEOUT)),
   removeFromCart: () => new Promise(resolve => setTimeout(resolve, TIMEOUT)),
-  checkOutCart: () => new Promise(resolve => setTimeout(resolve, TIMEOUT)),
+  checkOutCart: cart =>
+    new Promise(resolve => {
+      console.log('Start checking out cart', cart);
+      setTimeout(() => {
+        console.log('Cart is checke out!', cart);
+        resolve();
+      }, TIMEOUT);
+    }),
   filterBikes: () => new Promise(resolve => setTimeout(resolve, TIMEOUT / 2)),
 };
