@@ -35,10 +35,21 @@ const bikes = [
   },
 ];
 
+const TIMEOUT = 500;
+
 export default {
-  // getAllBikes: () =>
-  //   new Promise(resolve => {
-  //     setTimeout(() => resolve(bikes), 500);
-  //   }),
-  getAllBikes: () => bikes,
+  getAllBikes: () =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (Math.random() > 0.75) {
+          reject(new Error('Network Error.'));
+        }
+        resolve(bikes);
+      }, TIMEOUT);
+    }),
+  // getAllBikes: () => bikes,
+  addToCart: () => new Promise(resolve => setTimeout(resolve, TIMEOUT)),
+  removeFromCart: () => new Promise(resolve => setTimeout(resolve, TIMEOUT)),
+  checkOutCart: () => new Promise(resolve => setTimeout(resolve, TIMEOUT)),
+  filterBikes: () => new Promise(resolve => setTimeout(resolve, TIMEOUT / 2)),
 };

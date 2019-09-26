@@ -1,15 +1,32 @@
 import {
-  SET_BIKES,
+  FETCH_BIKES_REQUEST,
+  FETCH_BIKES_FAILURE,
+  FETCH_BIKES_SUCCESS,
+  // SET_BIKES,
   SET_BIKES_FILTER,
   ADD_TO_CART,
   REMOVE_FROM_CART,
   CHECKOUT_CART,
 } from './types';
 
-export const setBikes = bikes => ({
-  type: SET_BIKES,
+export const fetchBikesRequest = () => ({
+  type: FETCH_BIKES_REQUEST,
+});
+
+export const fetchBikesFailure = error => ({
+  type: FETCH_BIKES_FAILURE,
+  error,
+});
+
+export const fetchBikesSuccess = bikes => ({
+  type: FETCH_BIKES_SUCCESS,
   bikes,
 });
+
+// export const setBikes = bikes => ({
+//   type: SET_BIKES,
+//   bikes,
+// });
 
 export const setBikesFilter = bikesFilter => ({
   type: SET_BIKES_FILTER,

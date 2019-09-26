@@ -5,6 +5,10 @@ const initialState = {
   bikes: [],
   bikesFilter: BIKE_FILTERS.ALL,
   cart: {},
+  ui: {
+    isFetching: false,
+    error: null,
+  },
 };
 
 const updateItem = (items, updatedId, update) => {
@@ -21,7 +25,10 @@ const updateItem = (items, updatedId, update) => {
 
 export function bikes(state = initialState.bikes, action) {
   switch (action.type) {
-    case TYPES.SET_BIKES:
+    // case TYPES.SET_BIKES:
+    //   return action.bikes;
+
+    case TYPES.FETCH_BIKES_SUCCESS:
       return action.bikes;
 
     case TYPES.ADD_TO_CART:
@@ -64,6 +71,34 @@ export function cart(state = initialState.cart, action) {
 
     case TYPES.CHECKOUT_CART:
       return initialState.cart;
+
+    default:
+      return state;
+  }
+}
+
+export function ui(state = initialState.ui, action) {
+  switch (action.type) {
+    case TYPES.FETCH_BIKES_REQUEST:
+      return {
+        ...state,
+        isFetching: true,
+        error: null,
+      };
+
+    case TYPES.FETCH_BIKES_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+
+    case TYPES.FETCH_BIKES_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: null,
+      };
 
     default:
       return state;
