@@ -23,7 +23,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/cart" component={Cart} />
             <Route
-              path="/"
+              path="/:filter?"
               render={props => (
                 <BikesStore
                   {...props}

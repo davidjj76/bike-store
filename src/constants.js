@@ -1,9 +1,9 @@
 export const BIKE_TYPES = {
-  MOUNTAIN: 'MOUNTAIN',
-  ROAD: 'ROAD',
+  MOUNTAIN: 'mountain',
+  ROAD: 'road',
 };
 
 export const BIKE_FILTERS = {
-  ALL: 'ALL',
+  ALL: 'all',
   ...BIKE_TYPES,
 };

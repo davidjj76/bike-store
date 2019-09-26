@@ -3,7 +3,7 @@ import {
   FETCH_BIKES_FAILURE,
   FETCH_BIKES_SUCCESS,
   // SET_BIKES,
-  SET_BIKES_FILTER,
+  // SET_BIKES_FILTER,
   // ADD_TO_CART,
   REMOVE_FROM_CART,
   // CHECKOUT_CART,
@@ -43,10 +43,10 @@ export function fetchBikes() {
 //   bikes,
 // });
 
-export const setBikesFilter = bikesFilter => ({
-  type: SET_BIKES_FILTER,
-  bikesFilter,
-});
+// export const setBikesFilter = bikesFilter => ({
+//   type: SET_BIKES_FILTER,
+//   bikesFilter,
+// });
 
 // export const addToCart = (itemId, quantity = 1) => ({
 //   type: ADD_TO_CART,

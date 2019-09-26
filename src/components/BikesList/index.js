@@ -5,9 +5,9 @@ import BikesList from './BikesList';
 import { addToCart } from '../../store/actions';
 import { getVisibleBikes } from '../../store/selectors';
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    bikes: getVisibleBikes(state.bikes, state.bikesFilter),
+    bikes: getVisibleBikes(state.bikes, ownProps.bikesFilter),
   };
 }
 

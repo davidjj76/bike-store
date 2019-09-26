@@ -1,9 +1,9 @@
-import { BIKE_FILTERS } from '../constants';
+// import { BIKE_FILTERS } from '../constants';
 import * as TYPES from './types';
 
 const initialState = {
   bikes: [],
-  bikesFilter: BIKE_FILTERS.ALL,
+  // bikesFilter: BIKE_FILTERS.ALL,
   cart: {},
   ui: {
     isFetching: false,
@@ -51,15 +51,15 @@ export function bikes(state = initialState.bikes, action) {
   }
 }
 
-export function bikesFilter(state = initialState.bikesFilter, action) {
-  switch (action.type) {
-    case TYPES.SET_BIKES_FILTER:
-      return action.bikesFilter;
+// export function bikesFilter(state = initialState.bikesFilter, action) {
+//   switch (action.type) {
+//     case TYPES.SET_BIKES_FILTER:
+//       return action.bikesFilter;
 
-    default:
-      return state;
-  }
-}
+//     default:
+//       return state;
+//   }
+// }
 
 export function cart(state = initialState.cart, action) {
   switch (action.type) {
