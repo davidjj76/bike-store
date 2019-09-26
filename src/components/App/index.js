@@ -2,12 +2,7 @@ import { connect } from 'react-redux';
 
 import App from './App';
 
-import BikesService from '../../services/Bikes';
-import {
-  fetchBikesRequest,
-  fetchBikesFailure,
-  fetchBikesSuccess,
-} from '../../store/actions';
+import { fetchBikes } from '../../store/actions';
 
 function mapStateToProps(state) {
   return {
@@ -17,13 +12,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onLoad: () => {
-      dispatch(fetchBikesRequest());
-      return BikesService.getAllBikes()
-        .then(bikes => dispatch(fetchBikesSuccess(bikes)))
-        .catch(error => dispatch(fetchBikesFailure(error)));
-      // dispatch(setBikes(bikes));
-    },
+    onLoad: () => dispatch(fetchBikes()),
   };
 }
 

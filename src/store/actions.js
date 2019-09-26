@@ -9,19 +9,30 @@ import {
   CHECKOUT_CART,
 } from './types';
 
-export const fetchBikesRequest = () => ({
+import BikesService from '../services/Bikes';
+
+const fetchBikesRequest = () => ({
   type: FETCH_BIKES_REQUEST,
 });
 
-export const fetchBikesFailure = error => ({
+const fetchBikesFailure = error => ({
   type: FETCH_BIKES_FAILURE,
   error,
 });
 
-export const fetchBikesSuccess = bikes => ({
+const fetchBikesSuccess = bikes => ({
   type: FETCH_BIKES_SUCCESS,
   bikes,
 });
+
+export function fetchBikes() {
+  return function(dispatch) {
+    dispatch(fetchBikesRequest());
+    return BikesService.getAllBikes()
+      .then(bikes => dispatch(fetchBikesSuccess(bikes)))
+      .catch(error => dispatch(fetchBikesFailure(error)));
+  };
+}
 
 // export const setBikes = bikes => ({
 //   type: SET_BIKES,
