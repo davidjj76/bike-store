@@ -36,9 +36,5 @@ const bikes = [
 ];
 
 export default {
-  // getAllBikes: () =>
-  //   new Promise(resolve => {
-  //     setTimeout(() => resolve(bikes), 500);
-  //   }),
   getAllBikes: () => bikes,
 };

@@ -45,6 +45,6 @@ export default function BikesFilters({
 
 BikesFilters.propTypes = {
   className: T.string,
-  bikesFilter: T.oneOf(Object.keys(BIKE_FILTERS)),
+  bikesFilter: T.oneOf(Object.values(BIKE_FILTERS)),
   setBikesFilter: T.func.isRequired,
 };
