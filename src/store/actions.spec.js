@@ -1,8 +1,15 @@
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+
 import * as actions from './actions';
 import * as types from './types';
 import BikesService from '../services/Bikes';
 
 jest.mock('../services/Bikes');
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+const store = mockStore({});
 
 describe('removeFromCart', () => {
   it('should create a REMOVE_FROM_CART action', () => {
@@ -18,10 +25,8 @@ describe('removeFromCart', () => {
 });
 
 describe('fetchBikes', () => {
-  const dispatch = jest.fn();
-
   beforeEach(() => {
-    dispatch.mockClear();
+    store.clearActions();
   });
 
   describe('when getAllBikes resolves', () => {
@@ -29,12 +34,13 @@ describe('fetchBikes', () => {
     BikesService.getAllBikes.mockResolvedValueOnce(bikes);
 
     it('should dispatch a FETCH_BIKES_REQUEST and a FETCH_BIKES_SUCCESS actions', async () => {
-      await actions.fetchBikes()(dispatch);
-      expect(dispatch).toHaveBeenNthCalledWith(1, {
+      await store.dispatch(actions.fetchBikes());
+
+      expect(store.getActions()[0]).toEqual({
         type: types.FETCH_BIKES_REQUEST,
       });
 
-      expect(dispatch).toHaveBeenNthCalledWith(2, {
+      expect(store.getActions()[1]).toEqual({
         type: types.FETCH_BIKES_SUCCESS,
         bikes,
       });
@@ -46,13 +52,13 @@ describe('fetchBikes', () => {
     BikesService.getAllBikes.mockRejectedValue(error);
 
     it('should dispatch a FETCH_BIKES_REQUEST and a FETCH_BIKES_FAILURE actions', async () => {
-      await actions.fetchBikes()(dispatch);
+      await store.dispatch(actions.fetchBikes());
 
-      expect(dispatch).toHaveBeenNthCalledWith(1, {
+      expect(store.getActions()[0]).toEqual({
         type: types.FETCH_BIKES_REQUEST,
       });
 
-      expect(dispatch).toHaveBeenNthCalledWith(2, {
+      expect(store.getActions()[1]).toEqual({
         type: types.FETCH_BIKES_FAILURE,
         error,
       });
