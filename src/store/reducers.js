@@ -1,7 +1,7 @@
 // import { BIKE_FILTERS } from '../constants';
 import * as TYPES from './types';
 
-const initialState = {
+export const initialState = {
   bikes: [],
   // bikesFilter: BIKE_FILTERS.ALL,
   cart: {},
