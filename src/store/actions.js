@@ -54,11 +54,11 @@ export function fetchBikes() {
 //   quantity,
 // });
 
-export const addToCartRequest = () => ({
+const addToCartRequest = () => ({
   type: ADD_TO_CART_REQUEST,
 });
 
-export const addToCartSuccess = (itemId, quantity) => ({
+const addToCartSuccess = (itemId, quantity) => ({
   type: ADD_TO_CART_SUCCESS,
   itemId,
   quantity,
@@ -84,11 +84,11 @@ export const removeFromCart = (itemId, quantity) => ({
 //   type: CHECKOUT_CART,
 // });
 
-export const checkoutCartRequest = () => ({
+const checkoutCartRequest = () => ({
   type: CHECKOUT_CART_REQUEST,
 });
 
-export const checkoutCartSuccess = () => ({
+const checkoutCartSuccess = () => ({
   type: CHECKOUT_CART_SUCCESS,
 });
 
