@@ -62,6 +62,6 @@ export default function BikesList({ className, bikes, addToCart }) {
 
 BikesList.propTypes = {
   className: T.string,
-  bikes: T.arrayOf(T.shape({ id: T.string.isRequired })),
+  bikes: T.arrayOf(T.shape({ id: T.string.isRequired })).isRequired,
   addToCart: T.func.isRequired,
 };

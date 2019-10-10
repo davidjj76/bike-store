@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedHeader should render connected Header component 1`] = `
+<Root
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Provider
+    store={
+      Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "subscribe": [Function],
+      }
+    }
+  >
+    <BrowserRouter>
+      <Router
+        history={
+          Object {
+            "action": "POP",
+            "block": [Function],
+            "createHref": [Function],
+            "go": [Function],
+            "goBack": [Function],
+            "goForward": [Function],
+            "length": 1,
+            "listen": [Function],
+            "location": Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            },
+            "push": [Function],
+            "replace": [Function],
+          }
+        }
+      >
+        <Connect(Header)>
+          <Header
+            dispatch={[Function]}
+            totalCartItems={2}
+          >
+            <header
+              className="header"
+            >
+              <h1
+                className="title"
+              >
+                BIKES - STORE
+              </h1>
+              <div
+                className="navbar"
+              >
+                <NavLink
+                  className="link"
+                  isActive={[Function]}
+                  to="/"
+                >
+                  <Link
+                    aria-current="page"
+                    className="link active"
+                    style={Object {}}
+                    to="/"
+                  >
+                    <a
+                      aria-current="page"
+                      className="link active"
+                      href="/"
+                      onClick={[Function]}
+                      style={Object {}}
+                    >
+                      Bikes
+                    </a>
+                  </Link>
+                </NavLink>
+                <NavLink
+                  className="link"
+                  exact={true}
+                  to="/cart"
+                >
+                  <Link
+                    aria-current={null}
+                    className="link"
+                    to="/cart"
+                  >
+                    <a
+                      aria-current={null}
+                      className="link"
+                      href="/cart"
+                      onClick={[Function]}
+                    >
+                      Checkout (2)
+                    </a>
+                  </Link>
+                </NavLink>
+              </div>
+            </header>
+          </Header>
+        </Connect(Header)>
+         
+      </Router>
+    </BrowserRouter>
+  </Provider>
+</Root>
+`;
+
+exports[`Header should render Header component 1`] = `
+<header
+  className="header"
+>
+  <h1
+    className="title"
+  >
+    BIKES - STORE
+  </h1>
+  <div
+    className="navbar"
+  >
+    <NavLink
+      className="link"
+      isActive={[Function]}
+      to="/"
+    >
+      Bikes
+    </NavLink>
+    <NavLink
+      className="link"
+      exact={true}
+      to="/cart"
+    >
+      Checkout (12)
+    </NavLink>
+  </div>
+</header>
+`;

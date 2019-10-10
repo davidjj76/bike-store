@@ -3,14 +3,10 @@ import T from 'prop-types';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import App from '../App';
-
-export default function Root({ store }) {
+export default function Root({ store, children }) {
   return (
     <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
+      <Router>{children}</Router>
     </Provider>
   );
 }
