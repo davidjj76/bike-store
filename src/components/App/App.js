@@ -24,18 +24,7 @@ class App extends Component {
         <Header className="app-header" />
         <main className="app-main">
           <Switch>
-            <Route
-              exact
-              path="/cart"
-              render={props => (
-                <Cart
-                  {...props}
-                  items={[]}
-                  removeFromCart={() => {}}
-                  checkoutCart={() => {}}
-                />
-              )}
-            />
+            <Route exact path="/cart" component={Cart} />
             <Route
               path="/"
               render={props => (
@@ -44,7 +33,6 @@ class App extends Component {
                   className="app-store"
                   filtersClassName="app-store-filters"
                   listClassName="app-store-list"
-                  addToCart={() => {}}
                 />
               )}
             ></Route>

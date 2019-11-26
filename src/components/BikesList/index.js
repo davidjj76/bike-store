@@ -15,6 +15,7 @@ function mapDispatchToProps(dispatch) {
     addToCart: bikeId => dispatch(addToCart(bikeId)),
   };
 }
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
