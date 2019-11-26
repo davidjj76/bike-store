@@ -22,7 +22,7 @@ export const addToCart = (bikeId, quantity = 1) => ({
   quantity,
 });
 
-export const removeFromCart = (bikeId, quantity) => ({
+export const removeFromCart = (bikeId, quantity = 1) => ({
   type: REMOVE_FROM_CART,
   bikeId,
   quantity,

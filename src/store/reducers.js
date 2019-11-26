@@ -9,31 +9,30 @@ const initialState = {
   cart: {},
 };
 
+const updateBike = (bikes, updatedBikeId, update) => {
+  return bikes.map(bike => {
+    if (bike.id === updatedBikeId) {
+      return {
+        ...bike,
+        ...update(bike),
+      };
+    }
+    return bike;
+  });
+};
+
 const bikes = (state = initialState.bikes, action) => {
   switch (action.type) {
     case TYPES.SET_BIKES:
       return action.bikes;
     case TYPES.ADD_TO_CART:
-      return state.map(bike => {
-        if (bike.id === action.bikeId) {
-          return {
-            ...bike,
-            stock: bike.stock - action.quantity,
-          };
-        }
-        return bike;
-      });
+      return updateBike(state, action.bikeId, bike => ({
+        stock: bike.stock - action.quantity,
+      }));
     case TYPES.REMOVE_FROM_CART:
-      return state.map(bike => {
-        if (bike.id === action.bikeId) {
-          return {
-            ...bike,
-            stock: bike.stock + action.quantity,
-          };
-        }
-        return bike;
-      });
-
+      return updateBike(state, action.bikeId, bike => ({
+        stock: bike.stock + action.quantity,
+      }));
     default:
       return state;
   }
@@ -56,10 +55,9 @@ const cart = (state = initialState.cart, action) => {
         [action.bikeId]: (state[action.bikeId] || 0) + action.quantity,
       };
     case TYPES.REMOVE_FROM_CART:
-      return {
-        ...state,
-        [action.bikeId]: 0,
-      };
+      const newState = { ...state };
+      delete newState[action.bikeId];
+      return newState;
 
     case TYPES.CHECKOUT_CART:
       return initialState.cart;
