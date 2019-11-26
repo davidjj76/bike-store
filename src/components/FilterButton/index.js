@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import FilterButton from './FilterButton';
 
 import { setFilter } from '../../store/actions';
+import { isCurrentFilter } from '../../store/selectors';
 
 function mapStateToProps(state, ownProps) {
   return {
-    active: state.filter === ownProps.filter,
+    active: isCurrentFilter(state.filter, ownProps.filter),
   };
 }
 

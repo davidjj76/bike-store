@@ -7,3 +7,7 @@ export function getVisibleBikes(bikes, filter) {
   }
   return visibleBikes.map(bike => ({ ...bike, hasStock: bike.stock > 0 }));
 }
+
+export function isCurrentFilter(currentFilter, filter) {
+  return currentFilter === filter;
+}
