@@ -11,7 +11,6 @@ import BikesService from '../../services/Bikes';
 import './styles.css';
 class App extends Component {
   state = {
-    bikes: [],
     bikesFilter: BIKE_FILTERS.ALL,
   };
 
@@ -21,7 +20,7 @@ class App extends Component {
 
   loadBikes = () => {
     const bikes = BikesService.getAllBikes();
-    this.setState({ bikes });
+    this.props.loadBikes(bikes);
   };
 
   render() {
@@ -50,7 +49,6 @@ class App extends Component {
                   className="app-store"
                   filtersClassName="app-store-filters"
                   listClassName="app-store-list"
-                  bikes={this.state.bikes}
                   bikesFilter={this.state.bikesFilter}
                   setBikesFilter={() => {}}
                   addToCart={() => {}}
