@@ -11,3 +11,11 @@ export function getVisibleBikes(bikes, filter) {
 export function isCurrentFilter(currentFilter, filter) {
   return currentFilter === filter;
 }
+
+export function getCartItems(cart, bikes) {
+  return Object.entries(cart).map(entry => {
+    const [bikeId, quantity] = entry;
+    const bike = bikes.find(bike => bike.id === bikeId);
+    return { ...bike, quantity, totalPrice: bike.price * quantity };
+  });
+}
