@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import Cart from './Cart';
 import { getCartItems } from '../../store/selectors';
+import { removeFromCart } from '../../store/actions';
 
 function mapStateToProps(state) {
   return {
@@ -9,4 +10,14 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Cart);
+function mapDispatchToProps(dispatch) {
+  return {
+    removeFromCart: (itemId, quantity) =>
+      dispatch(removeFromCart(itemId, quantity)),
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Cart);
