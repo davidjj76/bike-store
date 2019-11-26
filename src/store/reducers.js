@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux';
-
 import { BIKE_FILTERS } from '../constants';
 import * as TYPES from './types';
 
@@ -21,7 +19,7 @@ const updateBike = (bikes, updatedBikeId, update) => {
   });
 };
 
-const bikes = (state = initialState.bikes, action) => {
+export const bikes = (state = initialState.bikes, action) => {
   switch (action.type) {
     case TYPES.SET_BIKES:
       return action.bikes;
@@ -38,7 +36,7 @@ const bikes = (state = initialState.bikes, action) => {
   }
 };
 
-const filter = (state = initialState.filter, action) => {
+export const filter = (state = initialState.filter, action) => {
   switch (action.type) {
     case TYPES.SET_FILTER:
       return action.filter;
@@ -47,7 +45,7 @@ const filter = (state = initialState.filter, action) => {
   }
 };
 
-const cart = (state = initialState.cart, action) => {
+export const cart = (state = initialState.cart, action) => {
   switch (action.type) {
     case TYPES.ADD_TO_CART:
       return {
@@ -66,11 +64,3 @@ const cart = (state = initialState.cart, action) => {
       return state;
   }
 };
-
-const reducer = combineReducers({
-  bikes,
-  filter,
-  cart,
-});
-
-export default reducer;
