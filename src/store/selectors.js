@@ -12,6 +12,10 @@ export function isCurrentFilter(currentFilter, filter) {
   return currentFilter === filter;
 }
 
+export function getTotalCartItems(cart) {
+  return Object.values(cart).reduce((acc, quantity) => acc + quantity, 0);
+}
+
 export function getCartItems(cart, bikes) {
   return Object.entries(cart).map(entry => {
     const [bikeId, quantity] = entry;
