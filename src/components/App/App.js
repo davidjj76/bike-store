@@ -13,8 +13,8 @@ class App extends Component {
     this.loadBikes();
   }
 
-  loadBikes = () => {
-    const bikes = BikesService.getAllBikes();
+  loadBikes = async () => {
+    const bikes = await BikesService.getAllBikes();
     this.props.loadBikes(bikes);
   };
 
