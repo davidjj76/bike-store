@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import T from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 
 import Header from '../Header';
 import Cart from '../Cart';
 import BikesStore from '../BikesStore';
-
+import Loading from '../Loading';
+import Error from '../Error';
 import BikesService from '../../services/Bikes';
 
 import './styles.css';
@@ -19,6 +21,7 @@ class App extends Component {
   };
 
   render() {
+    const { isFetching, error } = this.props;
     return (
       <div className="app">
         <Header className="app-header" />
@@ -38,10 +41,17 @@ class App extends Component {
             ></Route>
           </Switch>
         </main>
-        {/* <Loading className="app-loading" /> */}
+        {isFetching && <Loading className="app-loading" />}
+        {error && <Error className="app-error" error={error} />}
       </div>
     );
   }
 }
+
+App.propTypes = {
+  isFetching: T.bool,
+  error: T.object,
+  loadBikes: T.func.isRequired,
+};
 
 export default App;
