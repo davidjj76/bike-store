@@ -1,30 +1,26 @@
 import React from 'react';
 import T from 'prop-types';
 import classNames from 'classnames';
+import { NavLink } from 'react-router-dom';
+
+import { BIKE_FILTERS } from '../../constants';
 
 import './styles.css';
 
-export default function FilterButton({ active, className, children, onClick }) {
+export default function FilterButton({ filter, className, children }) {
   return (
-    <button
-      className={classNames('button', 'filter-button', className, { active })}
-      onClick={e => {
-        e.preventDefault();
-        onClick();
-      }}
+    <NavLink
+      exact
+      className={classNames('button', 'filter-button', className)}
+      to={filter === BIKE_FILTERS.ALL ? '/' : `/${filter}`}
     >
       {children}
-    </button>
+    </NavLink>
   );
 }
 
 FilterButton.propTypes = {
-  active: T.bool,
   className: T.string,
   children: T.node.isRequired,
-  onClick: T.func.isRequired,
-};
-
-FilterButton.defaultProps = {
-  active: false,
+  filter: T.string,
 };

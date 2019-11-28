@@ -4,9 +4,9 @@ import { addToCart } from '../../store/actions';
 
 import BikesList from './BikesList';
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    bikes: getVisibleBikes(state.bikes, state.filter),
+    bikes: getVisibleBikes(state.bikes, ownProps.filter),
   };
 }
 
