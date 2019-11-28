@@ -9,6 +9,21 @@ import {
   CHECKOUT_CART,
 } from './types';
 
+import BikesService from '../services/Bikes';
+
+export const fetchBikes = () => {
+  async function myFetchBikes(dispatch, getState, extraArgument) {
+    dispatch(fetchBikesRequest());
+    try {
+      const bikes = await BikesService.getAllBikes();
+      dispatch(fetchBikesSuccess(bikes));
+    } catch (error) {
+      dispatch(fetchBikesFailure(error));
+    }
+  }
+  return myFetchBikes;
+};
+
 export const fetchBikesRequest = () => ({
   type: FETCH_BIKES_REQUEST,
 });
