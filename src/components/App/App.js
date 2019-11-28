@@ -7,7 +7,6 @@ import Cart from '../Cart';
 import BikesStore from '../BikesStore';
 import Loading from '../Loading';
 import Error from '../Error';
-import BikesService from '../../services/Bikes';
 
 import './styles.css';
 class App extends Component {
@@ -15,10 +14,7 @@ class App extends Component {
     this.loadBikes();
   }
 
-  loadBikes = async () => {
-    const bikes = await BikesService.getAllBikes();
-    this.props.loadBikes(bikes);
-  };
+  loadBikes = this.props.loadBikes;
 
   render() {
     const { isFetching, error } = this.props;

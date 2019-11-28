@@ -42,9 +42,9 @@ export default {
   getAllBikes: () =>
     new Promise((resolve, reject) => {
       setTimeout(() => {
-        // if (Math.random() > 0.75) {
-        //   reject(new Error('Network Error.'));
-        // }
+        if (Math.random() > 0.75) {
+          reject(new Error('Network Error.'));
+        }
         resolve(bikes);
       }, TIMEOUT);
     }),
