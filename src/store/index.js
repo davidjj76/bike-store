@@ -1,9 +1,16 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
-import thunkMiddleware from 'redux-thunk';
+// import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import * as reducers from './reducers';
+
+const thunkMiddleware = ({ dispatch, getState }) => next => action => {
+  if (typeof action === 'function') {
+    return action(dispatch, getState);
+  }
+  return next(action);
+};
 
 const loggerMiddleware = createLogger();
 const composeEnhancers = composeWithDevTools;
