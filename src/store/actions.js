@@ -1,3 +1,5 @@
+import { push } from 'connected-react-router';
+
 import {
   FETCH_BIKES_REQUEST,
   FETCH_BIKES_FAILURE,
@@ -99,8 +101,9 @@ export function checkoutCart() {
   return function(dispatch, getState) {
     const { cart } = getState();
     dispatch(checkoutCartRequest());
-    return BikesService.checkOutCart(cart).then(() =>
-      dispatch(checkoutCartSuccess()),
-    );
+    return BikesService.checkOutCart(cart).then(() => {
+      dispatch(checkoutCartSuccess());
+      dispatch(push('/'));
+    });
   };
 }

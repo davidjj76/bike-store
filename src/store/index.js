@@ -3,7 +3,7 @@ import { createLogger } from 'redux-logger';
 // import thunkMiddleware from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { connectRouter } from 'connected-react-router';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 
 import * as reducers from './reducers';
 
@@ -27,7 +27,7 @@ export const history = createBrowserHistory();
 
 export function configureStore(preloadedState) {
   const reducer = createRootReducer(history);
-  const middlewares = [thunkMiddleware];
+  const middlewares = [routerMiddleware(history), thunkMiddleware];
   if (process.env.NODE_ENV === 'development') {
     middlewares.push(loggerMiddleware);
   }
