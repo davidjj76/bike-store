@@ -1,8 +1,8 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import { connectRouter, routerMiddleware, push } from 'connected-react-router';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
 import * as reducers from './reducers';
 
@@ -28,10 +28,7 @@ const configureMiddleware = ({ history, ...thunkExtraArgument }) => {
 
 export const configureStore = config => preloadedState => {
   const rootReducer = createRootReducer(config);
-  const middlewares = configureMiddleware({
-    ...config,
-    push,
-  });
+  const middlewares = configureMiddleware(config);
   const composeEnhancers = composeWithDevTools;
 
   const store = createStore(
