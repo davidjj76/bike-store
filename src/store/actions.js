@@ -1,5 +1,3 @@
-import { push } from 'connected-react-router';
-
 import {
   FETCH_BIKES_REQUEST,
   FETCH_BIKES_FAILURE,
@@ -15,10 +13,8 @@ import {
   CHECKOUT_CART_SUCCESS,
 } from './types';
 
-import BikesService from '../services/Bikes';
-
 export const fetchBikes = () => {
-  async function myFetchBikes(dispatch, getState, extraArgument) {
+  return async function(dispatch, _getState, { services: { BikesService } }) {
     dispatch(fetchBikesRequest());
     try {
       const bikes = await BikesService.getAllBikes();
@@ -26,8 +22,7 @@ export const fetchBikes = () => {
     } catch (error) {
       dispatch(fetchBikesFailure(error));
     }
-  }
-  return myFetchBikes;
+  };
 };
 
 export const fetchBikesRequest = () => ({
@@ -71,7 +66,7 @@ const addToCartSuccess = (bikeId, quantity) => ({
 });
 
 export function addToCart(bikeId, quantity = 1) {
-  return function(dispatch, getState) {
+  return function(dispatch, _getState, { services: { BikesService } }) {
     // With getState we could check stock before dispatch actions
     dispatch(addToCartRequest());
     return BikesService.addToCart().then(() =>
@@ -98,7 +93,7 @@ const checkoutCartSuccess = () => ({
 });
 
 export function checkoutCart() {
-  return function(dispatch, getState) {
+  return function(dispatch, getState, { push, services: { BikesService } }) {
     const { cart } = getState();
     dispatch(checkoutCartRequest());
     return BikesService.checkOutCart(cart).then(() => {

@@ -1,40 +1,43 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-// import thunkMiddleware from 'redux-thunk';
-import { createBrowserHistory } from 'history';
+import { connectRouter, routerMiddleware, push } from 'connected-react-router';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { connectRouter, routerMiddleware } from 'connected-react-router';
 
 import * as reducers from './reducers';
 
-const thunkMiddleware = ({ dispatch, getState }) => next => action => {
-  if (typeof action === 'function') {
-    return action(dispatch, getState);
-  }
-  return next(action);
-};
-
-const loggerMiddleware = createLogger();
-const composeEnhancers = composeWithDevTools;
-
-const createRootReducer = history =>
-  combineReducers({
+const createRootReducer = ({ history }) => {
+  const reducer = combineReducers({
     router: connectRouter(history),
     ...reducers,
   });
+  return reducer;
+};
 
-export const history = createBrowserHistory();
-
-export function configureStore(preloadedState) {
-  const reducer = createRootReducer(history);
-  const middlewares = [routerMiddleware(history), thunkMiddleware];
+const configureMiddleware = ({ history, ...thunkExtraArgument }) => {
+  const middlewares = [
+    routerMiddleware(history),
+    thunkMiddleware.withExtraArgument(thunkExtraArgument),
+  ];
   if (process.env.NODE_ENV === 'development') {
+    const loggerMiddleware = createLogger();
     middlewares.push(loggerMiddleware);
   }
+  return middlewares;
+};
+
+export const configureStore = config => preloadedState => {
+  const rootReducer = createRootReducer(config);
+  const middlewares = configureMiddleware({
+    ...config,
+    push,
+  });
+  const composeEnhancers = composeWithDevTools;
+
   const store = createStore(
-    reducer,
+    rootReducer,
     preloadedState,
     composeEnhancers(applyMiddleware(...middlewares)),
   );
   return store;
-}
+};
