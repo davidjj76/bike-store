@@ -1,13 +1,16 @@
 import React from 'react';
 import T from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getTotalCartItems } from '../../store/selectors';
 
 import './styles.css';
 import classNames from 'classnames';
 
 const validFilters = ['/mountain', '/road'];
 
-export default function Header({ className, totalCartItems }) {
+export default function Header({ className }) {
+  const totalCartItems = useSelector(state => getTotalCartItems(state.cart));
   return (
     <header className={classNames('header', className)}>
       <h1 className="title">BIKES - STORE</h1>
@@ -31,5 +34,5 @@ export default function Header({ className, totalCartItems }) {
 
 Header.propTypes = {
   className: T.string,
-  totalCartItems: T.number.isRequired,
+  // totalCartItems: T.number.isRequired,
 };
