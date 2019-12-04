@@ -55,11 +55,11 @@ export const setFilter = filter => ({
 //   quantity,
 // });
 
-const addToCartRequest = () => ({
+export const addToCartRequest = () => ({
   type: ADD_TO_CART_REQUEST,
 });
 
-const addToCartSuccess = (bikeId, quantity) => ({
+export const addToCartSuccess = (bikeId, quantity) => ({
   type: ADD_TO_CART_SUCCESS,
   bikeId,
   quantity,

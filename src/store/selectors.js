@@ -12,7 +12,7 @@ export function isCurrentFilter(currentFilter, filter) {
   return currentFilter === filter;
 }
 
-export function getTotalCartItems(cart) {
+export function getTotalCartItems({cart}) {
   return Object.values(cart).reduce((acc, quantity) => acc + quantity, 0);
 }
 

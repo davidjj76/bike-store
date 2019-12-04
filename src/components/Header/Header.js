@@ -10,7 +10,7 @@ import classNames from 'classnames';
 const validFilters = ['/mountain', '/road'];
 
 export default function Header({ className }) {
-  const totalCartItems = useSelector(state => getTotalCartItems(state.cart));
+  const totalCartItems = useSelector(getTotalCartItems);
   return (
     <header className={classNames('header', className)}>
       <h1 className="title">BIKES - STORE</h1>
