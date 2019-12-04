@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BikesList should render 1`] = `
+<div
+  className="bikes-list test"
+>
+  Bikes List
+  <List
+    className="list"
+    items={
+      Array [
+        Object {
+          "hasStock": true,
+          "id": "bike1",
+          "image": "url/to/image",
+          "name": "mountain cf 7.0",
+          "price": 3999.99,
+        },
+      ]
+    }
+    renderItem={[Function]}
+  />
+</div>
+`;

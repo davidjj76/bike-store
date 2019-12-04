@@ -15,6 +15,7 @@ describe('BikesList', () => {
         hasStock: true,
       },
     ],
+    className: 'test',
   };
   const render = props => shallow(<BikesList {...defaultProps} {...props} />);
   let wrapper;
@@ -24,14 +25,14 @@ describe('BikesList', () => {
   });
 
   it('should render', () => {
-    expect(wrapper.exists()).toBe(true);
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a list of bikes', () => {
     expect(wrapper.find('.list').props().items).toHaveLength(1);
   });
 
-  it('should add a bike to cart', () => {
+  it('should add a bike', () => {
     const bike = defaultProps.bikes[0];
     const list = wrapper
       .find('.list')
