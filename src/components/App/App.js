@@ -5,23 +5,18 @@ import Header from '../Header';
 import Cart from '../Cart';
 import BikesStore from '../BikesStore';
 
-import { BIKE_FILTERS } from '../../constants';
 import BikesService from '../../services/Bikes';
 
 import './styles.css';
-class App extends Component {
-  state = {
-    bikes: [],
-    bikesFilter: BIKE_FILTERS.ALL,
-  };
 
+class App extends Component {
   componentDidMount() {
     this.loadBikes();
   }
 
   loadBikes = () => {
     const bikes = BikesService.getAllBikes();
-    this.setState({ bikes });
+    this.props.loadBikes(bikes);
   };
 
   render() {
@@ -50,8 +45,8 @@ class App extends Component {
                   className="app-store"
                   filtersClassName="app-store-filters"
                   listClassName="app-store-list"
-                  bikes={this.state.bikes}
-                  bikesFilter={this.state.bikesFilter}
+                  bikes={this.props.bikes}
+                  bikesFilter={this.props.bikesFilter}
                   setBikesFilter={() => {}}
                   addToCart={() => {}}
                 />
