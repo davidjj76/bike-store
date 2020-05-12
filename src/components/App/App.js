@@ -22,7 +22,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <Header className="app-header" totalCartItems={0} />
+        <Header className="app-header" />
         <main className="app-main">
           <Switch>
             <Route
@@ -31,7 +31,6 @@ class App extends Component {
               render={props => (
                 <Cart
                   {...props}
-                  items={[]}
                   removeFromCart={() => {}}
                   checkoutCart={() => {}}
                 />
@@ -45,8 +44,6 @@ class App extends Component {
                   className="app-store"
                   filtersClassName="app-store-filters"
                   listClassName="app-store-list"
-                  setBikesFilter={() => {}}
-                  addToCart={() => {}}
                 />
               )}
             ></Route>

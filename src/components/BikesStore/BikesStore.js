@@ -11,18 +11,11 @@ export default function BikesStore({
   className,
   filtersClassName,
   listClassName,
-  bikesFilter,
-  setBikesFilter,
-  addToCart,
 }) {
   return (
     <div className={classNames('bikes-store', className)}>
-      <BikesFilters
-        className={filtersClassName}
-        bikesFilter={bikesFilter}
-        setBikesFilter={setBikesFilter}
-      />
-      <BikesList className={listClassName} addToCart={addToCart} />
+      <BikesFilters className={filtersClassName} />
+      <BikesList className={listClassName} />
     </div>
   );
 }
