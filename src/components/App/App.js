@@ -28,13 +28,7 @@ class App extends Component {
             <Route
               exact
               path="/cart"
-              render={props => (
-                <Cart
-                  {...props}
-                  removeFromCart={() => {}}
-                  checkoutCart={() => {}}
-                />
-              )}
+              render={props => <Cart {...props} removeFromCart={() => {}} />}
             />
             <Route
               path="/"
