@@ -45,8 +45,6 @@ class App extends Component {
                   className="app-store"
                   filtersClassName="app-store-filters"
                   listClassName="app-store-list"
-                  bikes={this.props.bikes}
-                  bikesFilter={this.props.bikesFilter}
                   setBikesFilter={() => {}}
                   addToCart={() => {}}
                 />
