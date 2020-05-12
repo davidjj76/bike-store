@@ -1,12 +1,15 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from '../App';
 
-export default function Root(props) {
+export default function Root({ store, ...props }) {
   return (
-    <Router>
-      <App {...props} />
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <App {...props} />
+      </Router>
+    </Provider>
   );
 }
