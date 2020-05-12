@@ -7,6 +7,7 @@ import BikesStore from '../BikesStore';
 
 import { BIKE_FILTERS } from '../../constants';
 import BikesService from '../../services/Bikes';
+import { setBikes } from '../../store/actions';
 
 import './styles.css';
 class App extends Component {
@@ -16,12 +17,16 @@ class App extends Component {
   };
 
   componentDidMount() {
+    this.props.store.subscribe(() =>
+      this.setState({ bikes: this.props.store.getState().bikes })
+    );
     this.loadBikes();
   }
 
   loadBikes = () => {
     const bikes = BikesService.getAllBikes();
-    this.setState({ bikes });
+    this.props.store.dispatch(setBikes(bikes));
+    // this.setState({ bikes });
   };
 
   render() {
