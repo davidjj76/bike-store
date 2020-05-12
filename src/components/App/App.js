@@ -25,16 +25,11 @@ class App extends Component {
         <Header className="app-header" />
         <main className="app-main">
           <Switch>
-            <Route
-              exact
-              path="/cart"
-              render={props => <Cart {...props} removeFromCart={() => {}} />}
-            />
+            <Route exact path="/cart" component={Cart} />
             <Route
               path="/"
-              render={props => (
+              render={() => (
                 <BikesStore
-                  {...props}
                   className="app-store"
                   filtersClassName="app-store-filters"
                   listClassName="app-store-list"
