@@ -2,11 +2,11 @@ import { connect } from 'react-redux';
 
 import BikesList from './BikesList';
 
-import { getBikes } from '../../store/selectors';
+import { getVisibleBikes } from '../../store/selectors';
 
 function mapStateToProps(state, ownProps) {
   return {
-    bikes: getBikes(state),
+    bikes: getVisibleBikes(state),
   };
 }
 
