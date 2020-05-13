@@ -29,3 +29,5 @@ export function getCartItems(state) {
     return { ...bike, quantity, totalPrice: bike.price * quantity };
   });
 }
+
+export const getUi = state => state.ui;

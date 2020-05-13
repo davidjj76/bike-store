@@ -1,7 +1,16 @@
 import * as TYPES from './types';
 
-export const setBikes = bikes => ({
-  type: TYPES.SET_BIKES,
+export const fetchBikesRequest = () => ({
+  type: TYPES.FETCH_BIKES_REQUEST,
+});
+
+export const fetchBikesFailure = error => ({
+  type: TYPES.FETCH_BIKES_FAILURE,
+  error,
+});
+
+export const fetchBikesSuccess = bikes => ({
+  type: TYPES.FETCH_BIKES_SUCCESS,
   bikes,
 });
 

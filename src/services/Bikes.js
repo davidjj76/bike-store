@@ -35,6 +35,16 @@ const bikes = [
   },
 ];
 
+const TIMEOUT = 1000;
+
 export default {
-  getAllBikes: () => bikes,
+  getAllBikes: () =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (Math.random() > 0.99) {
+          reject(new Error('Network Error.'));
+        }
+        resolve(bikes);
+      }, TIMEOUT);
+    }),
 };

@@ -4,8 +4,8 @@ import { Switch, Route } from 'react-router-dom';
 import Header from '../Header';
 import Cart from '../Cart';
 import BikesStore from '../BikesStore';
-
-import BikesService from '../../services/Bikes';
+import Loading from '../Loading';
+import Error from '../Error';
 
 import './styles.css';
 
@@ -15,11 +15,11 @@ class App extends Component {
   }
 
   loadBikes = () => {
-    const bikes = BikesService.getAllBikes();
-    this.props.loadBikes(bikes);
+    this.props.loadBikes();
   };
 
   render() {
+    const { isFetching, error } = this.props;
     return (
       <div className="app">
         <Header className="app-header" />
@@ -38,7 +38,8 @@ class App extends Component {
             ></Route>
           </Switch>
         </main>
-        {/* <Loading className="app-loading" /> */}
+        {isFetching && <Loading className="app-loading" />}
+        {error && <Error className="app-error" error={error} />}
       </div>
     );
   }
