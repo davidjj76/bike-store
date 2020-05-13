@@ -1,36 +1,22 @@
 import { connect } from 'react-redux';
 
 import App from './App';
-import {
-  fetchBikesSuccess,
-  fetchBikesRequest,
-  fetchBikesFailure,
-} from '../../store/actions';
+import { fetchBikes } from '../../store/actions';
 import { getUi } from '../../store/selectors';
-
-import BikesService from '../../services/Bikes';
 
 function mapStateToProps(state, ownProps) {
   return getUi(state);
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
-  return {
-    loadBikes: async () => {
-      dispatch(fetchBikesRequest());
-      try {
-        const bikes = await BikesService.getAllBikes();
-        dispatch(fetchBikesSuccess(bikes));
-      } catch (error) {
-        dispatch(fetchBikesFailure(error));
-      }
-    },
-  };
-}
+// function mapDispatchToProps(dispatch, ownProps) {
+//   return {
+//     loadBikes: () => dispatch(fetchBikes()),
+//   };
+// }
 
-// const mapDispatchToProps = {
-//   loadBikes: fetchBikesSuccess,
-// };
+const mapDispatchToProps = {
+  loadBikes: fetchBikes,
+};
 
 const connected = connect(mapStateToProps, mapDispatchToProps);
 const AppConnected = connected(App);
