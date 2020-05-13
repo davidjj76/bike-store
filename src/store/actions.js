@@ -27,11 +27,6 @@ export const fetchBikes = () => {
   return action;
 };
 
-export const setFilter = filter => ({
-  type: TYPES.SET_FILTER,
-  filter,
-});
-
 export const addToCart = (bikeId, quantity = 1) => ({
   type: TYPES.ADD_TO_CART,
   bikeId,

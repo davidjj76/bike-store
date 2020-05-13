@@ -1,9 +1,7 @@
-import { BIKE_FILTERS } from '../constants';
 import * as TYPES from './types';
 
 const initialState = {
   bikes: [],
-  filter: BIKE_FILTERS.ALL,
   cart: {},
   ui: {
     error: null,
@@ -37,16 +35,6 @@ export function bikes(state = initialState.bikes, action) {
       return updateItem(state, action.bikeId, bike => ({
         stock: bike.stock + action.quantity,
       }));
-
-    default:
-      return state;
-  }
-}
-
-export function filter(state = initialState.filter, action) {
-  switch (action.type) {
-    case TYPES.SET_FILTER:
-      return action.filter;
 
     default:
       return state;

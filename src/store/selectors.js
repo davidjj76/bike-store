@@ -1,13 +1,11 @@
 import { BIKE_FILTERS } from '../constants';
 
 export const getBikes = state => state.bikes;
-export const getFilter = state => state.filter;
 export const getCart = state => state.cart;
 export const isActiveFilter = (state, filter) => state.filter === filter;
 
-export function getVisibleBikes(state) {
+export function getVisibleBikes(state, filter) {
   const bikes = getBikes(state);
-  const filter = getFilter(state);
   let visibleBikes = bikes;
   if (filter !== BIKE_FILTERS.ALL) {
     visibleBikes = bikes.filter(bike => bike.type === filter);

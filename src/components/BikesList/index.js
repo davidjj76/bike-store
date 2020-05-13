@@ -7,7 +7,7 @@ import { getVisibleBikes } from '../../store/selectors';
 
 function mapStateToProps(state, ownProps) {
   return {
-    bikes: getVisibleBikes(state),
+    bikes: getVisibleBikes(state, ownProps.filter),
   };
 }
 

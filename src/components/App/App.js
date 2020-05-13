@@ -27,9 +27,10 @@ class App extends Component {
           <Switch>
             <Route exact path="/cart" component={Cart} />
             <Route
-              path="/"
-              render={() => (
+              path="/:filter?"
+              render={props => (
                 <BikesStore
+                  {...props}
                   className="app-store"
                   filtersClassName="app-store-filters"
                   listClassName="app-store-list"
