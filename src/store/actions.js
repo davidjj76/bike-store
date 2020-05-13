@@ -16,14 +16,17 @@ export const fetchBikesSuccess = bikes => ({
   bikes,
 });
 
-export const fetchBikes = () => async (dispatch, getState, extraArgument) => {
-  dispatch(fetchBikesRequest());
-  try {
-    const bikes = await BikesService.getAllBikes();
-    dispatch(fetchBikesSuccess(bikes));
-  } catch (error) {
-    dispatch(fetchBikesFailure(error));
+export const fetchBikes = () => {
+  async function action(dispatch, getState, extraArgument) {
+    dispatch(fetchBikesRequest());
+    try {
+      const bikes = await BikesService.getAllBikes();
+      dispatch(fetchBikesSuccess(bikes));
+    } catch (error) {
+      dispatch(fetchBikesFailure(error));
+    }
   }
+  return action;
 };
 
 export const setFilter = filter => ({
