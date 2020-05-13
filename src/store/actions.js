@@ -42,3 +42,12 @@ export const removeFromCart = (bikeId, quantity = 1) => ({
 export const checkoutCart = () => ({
   type: TYPES.CHECKOUT_CART,
 });
+
+export const checkoutCartAndNavigate = () => (
+  dispatch,
+  getState,
+  { history }
+) => {
+  dispatch(checkoutCart());
+  history.push('/');
+};
