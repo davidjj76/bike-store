@@ -8,13 +8,20 @@ import * as reducers from './reducers';
 const reducer = combineReducers(reducers);
 
 const composeEnhancers = composeWithDevTools;
-const middleware = [ReduxThunk, ReduxLogger];
 
-export function configureStore(preloadedState) {
-  const store = createStore(
-    reducer,
-    preloadedState,
-    composeEnhancers(applyMiddleware(...middleware))
-  );
-  return store;
+const configureMiddleware = config => {
+  const middlewares = [ReduxThunk.withExtraArgument(config), ReduxLogger];
+  return middlewares;
+};
+
+export function configureStore(config) {
+  return function (preloadedState) {
+    const middlewares = configureMiddleware(config);
+    const store = createStore(
+      reducer,
+      preloadedState,
+      composeEnhancers(applyMiddleware(...middlewares))
+    );
+    return store;
+  };
 }
