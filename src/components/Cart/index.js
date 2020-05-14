@@ -11,12 +11,9 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
-  return {
-    checkoutCart: () => dispatch(checkoutCartAndNavigate()),
-    removeFromCart: (itemId, quantity) =>
-      dispatch(removeFromCart(itemId, quantity)),
-  };
-}
+const mapDispatchToProps = {
+  checkoutCart: checkoutCartAndNavigate,
+  removeFromCart,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

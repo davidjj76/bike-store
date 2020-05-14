@@ -24,10 +24,7 @@ function CartItem({
       <span className="name">{name}</span>
       <span className="quantity">{`${quantity}`}</span>
       <span className="price">{`${totalPrice.toLocaleString()} €`}</span>
-      <button
-        className="link remove"
-        onClick={() => onRemoveFromCartClick(quantity)}
-      >
+      <button className="link remove" onClick={onRemoveFromCartClick}>
         remove from cart
       </button>
     </div>
@@ -69,9 +66,7 @@ export default function Cart({
             renderItem={item => (
               <CartItem
                 {...item}
-                onRemoveFromCartClick={quantity =>
-                  removeFromCart(item.id, quantity)
-                }
+                onRemoveFromCartClick={() => removeFromCart(item.id)}
               />
             )}
           />

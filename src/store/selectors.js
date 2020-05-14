@@ -28,4 +28,9 @@ export function getCartItems(state) {
   });
 }
 
+export function getBikeQuantityInCart(state, bikeId) {
+  const cart = getCart(state);
+  return cart[bikeId] || 0;
+}
+
 export const getUi = state => state.ui;
