@@ -1,6 +1,8 @@
 import * as TYPES from './types';
 import { getBikeQuantityInCart } from './selectors';
 
+import BikesService from '../services/Bikes';
+
 export const fetchBikesRequest = () => ({
   type: TYPES.FETCH_BIKES_REQUEST,
 });
@@ -16,7 +18,7 @@ export const fetchBikesSuccess = bikes => ({
 });
 
 export const fetchBikes = () =>
-  async function (dispatch, getState, { BikesService }) {
+  async function (dispatch, getState) {
     dispatch(fetchBikesRequest());
     try {
       const bikes = await BikesService.getAllBikes();
