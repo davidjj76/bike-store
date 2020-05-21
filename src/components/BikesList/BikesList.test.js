@@ -5,12 +5,16 @@ import BikesList from './BikesList';
 describe('BikeList', () => {
   const props = {
     className: 'test',
-    bikes: [{ id: '1' }, { id: '2' }],
+    bikes: [{ id: '1' }, { id: '3' }],
     addToCart: jest.fn(),
   };
   let wrapper;
   beforeEach(() => {
     wrapper = shallow(<BikesList {...props} />);
+  });
+
+  test('snapshot testing', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
   test('should render', () => {

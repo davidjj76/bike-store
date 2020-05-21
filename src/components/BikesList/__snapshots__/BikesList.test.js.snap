@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BikeList snapshot testing 1`] = `
+<div
+  className="bikes-list test"
+>
+  Bikes List
+  <List
+    className="list"
+    items={
+      Array [
+        Object {
+          "id": "1",
+        },
+        Object {
+          "id": "3",
+        },
+      ]
+    }
+    renderItem={[Function]}
+  />
+</div>
+`;
