@@ -1,9 +1,20 @@
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+
 import * as actions from './actions';
 import * as TYPES from './types';
 
 import BikesService from '../services/Bikes';
 
 jest.mock('../services/Bikes');
+
+const history = {
+  push: jest.fn(),
+};
+
+const middlewares = [thunk.withExtraArgument({ BikesService, history })];
+const mockStore = configureStore(middlewares);
+const store = mockStore({});
 
 describe('actions', () => {
   describe('addToCartSuccess', () => {
@@ -72,6 +83,24 @@ describe('actions', () => {
         type: TYPES.FETCH_BIKES_FAILURE,
         error,
       });
+    });
+  });
+
+  describe('checkoutCartAndNavigate', () => {
+    beforeEach(async () => {
+      await store.dispatch(actions.checkoutCartAndNavigate());
+    });
+
+    test('should dispatch actions', () => {
+      const expectedActions = [
+        { type: TYPES.CHECKOUT_CART_REQUEST },
+        { type: TYPES.CHECKOUT_CART_SUCCESS },
+      ];
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    test('should redirect to home', () => {
+      expect(history.push).toHaveBeenCalledWith('/');
     });
   });
 });
